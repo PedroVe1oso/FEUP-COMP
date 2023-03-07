@@ -39,4 +39,8 @@ public class JavaCalcGenerator extends AJmmVisitor<String, String> {
                 + " = " + jmmNode.get("value")
                 + ";";
     }
+
+    private String dealWithLiteral(JmmNode jmmNode, String s) {
+        return s + jmmNode.get("value");
+    }
 }
