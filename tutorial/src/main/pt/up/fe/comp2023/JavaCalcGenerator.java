@@ -10,7 +10,8 @@ public class JavaCalcGenerator extends AJmmVisitor<String, String> {
         this.className = className;
     }
 
-    protected void builVisitor() {
+    @Override
+    protected void buildVisitor() {
         addVisit("Program", this::dealWithProgram);
         addVisit("Assignment", this::dealWithAssignment);
         addVisit("Integer", this::dealWithLiteral);
@@ -23,7 +24,7 @@ public class JavaCalcGenerator extends AJmmVisitor<String, String> {
         String s2 = s + "\t";
         ret += s2 + "public static void main(String[] args) {\n";
 
-        for(jmmNode child: jmmNode.getChildren()) {
+        for(JmmNode child: jmmNode.getChildren()) {
             ret += visit(child, s2 + "\t");
             ret += "\n";
         }
@@ -31,5 +32,11 @@ public class JavaCalcGenerator extends AJmmVisitor<String, String> {
         ret += s2 + "}\n";
         ret += s + "}\n";
         return ret;
+    }
+
+    private String dealWithAssignment(JmmNode jmmNode, String s) {
+        return s + "int " + jmmNode.get("var")
+                + " = " + jmmNode.get("value")
+                + ";";
     }
 }
