@@ -19,8 +19,8 @@ statement
     ;
 
 expression
-    : expression ('*' | '/') expression
-    | expression ('+' | '-') expression
-    | INTEGER
-    | ID
+    : expression op =( '*' | '/' ) expression
+    | expression op =( '+' | '-') expression
+    | value = INTEGER
+    | value = ID
     ;
